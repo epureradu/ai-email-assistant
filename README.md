@@ -4,7 +4,7 @@
 **Grupa:** 1146  
 **Link aplicație:** https://ai-email-assistant-snowy.vercel.app  
 **Link video:** https://youtu.be/XnTe5lXMaqQ
-
+**Link GitHub:** https://github.com/epureradu/ai-email-assistant
 ---
 
 ## 1. Introducere
@@ -83,9 +83,11 @@ Body:
 
 ## 5. Capturi ecran aplicație
 
-(Adaugi screenshots după)
+### (screenshots/Poza%201.jpg)
 
----
+### (screenshots/Poza%202.jpg)
+
+### (screenshots/Poza%203.jpg)
 
 ## 6. Referințe
 
