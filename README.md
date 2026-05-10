@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# AI Email Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Nume:** Epure Radu Corneliu  
+**Grupa:** 1146  
+**Link aplicație:** https://ai-email-assistant-snowy.vercel.app  
+**Link video:** (adaugi după ce încarci pe YouTube)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 1. Introducere
 
-### `npm start`
+AI Email Assistant este o aplicație web care permite utilizatorilor să genereze și să trimită emailuri profesionale folosind inteligența artificială. Utilizatorul descrie pe scurt ce vrea să comunice, iar aplicația generează automat un email complet și îl poate trimite direct destinatarului.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 2. Descriere problemă
 
-### `npm test`
+Redactarea emailurilor profesionale consumă timp și necesită abilități de comunicare scrisă. Această aplicație rezolvă problema prin automatizarea procesului de scriere a emailurilor folosind AI, permițând utilizatorilor să genereze emailuri de calitate în câteva secunde, în diferite tonuri (profesional, formal, prietenos, urgent).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 3. Descriere API
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Serviciu 1 — Claude AI API (Anthropic)
+- **Scop:** Generarea conținutului emailurilor folosind inteligența artificială
+- **Endpoint:** `POST https://api.anthropic.com/v1/messages`
+- **Autentificare:** API Key în header `x-api-key`
+- **Model folosit:** `claude-haiku-4-5`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Serviciu 2 — EmailJS
+- **Scop:** Trimiterea emailurilor generate către destinatar
+- **Endpoint:** `POST https://api.emailjs.com/api/v1.0/email/send`
+- **Autentificare:** Public Key + Service ID + Template ID
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Serviciu 3 — Firebase (Google)
+- **Scop:** Autentificarea utilizatorilor și stocarea istoricului emailurilor
+- **Servicii folosite:** Firebase Authentication + Firestore Database
+- **Autentificare:** Firebase API Key
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 4. Flux de date
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Exemplu request generare email (Claude AI):
+```json
+POST https://api.anthropic.com/v1/messages
+Headers:
+  x-api-key: sk-ant-...
+  anthropic-version: 2023-06-01
+Body:
+{
+  "model": "claude-haiku-4-5",
+  "max_tokens": 1024,
+  "messages": [{
+    "role": "user",
+    "content": "Scrie un email profesional în română despre: cer o zi liberă"
+  }]
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Exemplu response:
+```json
+{
+  "content": [{
+    "type": "text",
+    "text": "Subject: Cerere zi liberă\n\nStimată doamnă/domnule director..."
+  }]
+}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Metode HTTP folosite:
+- **POST** — generare email cu Claude AI
+- **POST** — trimitere email prin EmailJS
+- **POST** — înregistrare/autentificare utilizator (Firebase)
+- **GET** — încărcare istoric emailuri (Firestore)
 
-## Learn More
+### Autentificare și autorizare:
+- **Firebase Authentication** — gestionează sesiunile utilizatorilor cu persistență la refresh
+- **Claude API** — autentificare prin API Key în header
+- **EmailJS** — autentificare prin Public Key, Service ID și Template ID
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 5. Capturi ecran aplicație
 
-### Code Splitting
+(Adaugi screenshots după)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 6. Referințe
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Anthropic Claude API](https://docs.anthropic.com)
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [EmailJS Documentation](https://www.emailjs.com/docs)
+- [React Documentation](https://react.dev)
+- [Vercel Deployment](https://vercel.com/docs)
