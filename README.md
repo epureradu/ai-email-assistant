@@ -3,7 +3,7 @@
 **Nume:** Epure Radu Corneliu  
 **Grupa:** 1146  
 **Link aplicație:** https://ai-email-assistant-snowy.vercel.app  
-**Link video:** (adaugi după ce încarci pe YouTube)
+**Link video:** https://youtu.be/XnTe5lXMaqQ
 
 ---
 
